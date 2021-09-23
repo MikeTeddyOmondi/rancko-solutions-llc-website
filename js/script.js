@@ -1,17 +1,17 @@
 "use strict";
 console.log("JavaScript running!...");
 
-const toggle = document.querySelector(".toggle");
-const navigation = document.querySelector(".navigation");
-
 if ("serviceWorker" in navigator) {
 	window.addEventListener("load", () =>
 		navigator.serviceWorker
-			.register("sw.js")
-			.then((registration) => console.log("Service Worker installed"))
+			.register("./sw.js")
+			.then((registration) => console.log("Service Worker registered..."))
 			.catch((err) => "SW registration failed"),
 	);
 }
+
+const toggle = document.querySelector(".toggle");
+const navigation = document.querySelector(".navigation");
 
 toggle.addEventListener("click", () => {
 	toggle.classList.toggle("active");
