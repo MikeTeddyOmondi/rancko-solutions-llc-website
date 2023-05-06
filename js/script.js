@@ -87,7 +87,7 @@ const API_URL =
 	window.location.hostname === "127.0.0.1" ||
 	window.location.hostname === "localhost"
 		? "http://localhost:5000"
-		: "https://rancko-solutions-api.herokuapp.com";
+		: "https://rancko-solutions-api.up.railway.app";
 
 if (contactform) {
 	contactform.addEventListener("submit", (event) => {
