@@ -87,7 +87,7 @@ const API_URL =
   window.location.hostname === "127.0.0.1" ||
   window.location.hostname === "localhost"
     ? "http://localhost:5000"
-    : "https://rancko-solutions-api.onrender.com/";
+    : "https://rancko-solutions-api.onrender.com";
 
 if (contactform) {
 	contactform.addEventListener("submit", (event) => {
