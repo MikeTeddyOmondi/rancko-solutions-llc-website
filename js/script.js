@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		loading.classList.add("show");
 
 		// load more data
-		setTimeout(getPost, 1000);
+		setTimeout(getPost, 2000);
 	}
 
 	async function getPost() {
@@ -84,10 +84,10 @@ const contactform = document.getElementById("contactForm");
 //const subscribeform = document.getElementById("subscribeForm");
 
 const API_URL =
-	window.location.hostname === "127.0.0.1" ||
-	window.location.hostname === "localhost"
-		? "http://localhost:5000"
-		: "https://rancko-solutions-api.up.railway.app";
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://rancko-solutions-api.onrender.com/";
 
 if (contactform) {
 	contactform.addEventListener("submit", (event) => {

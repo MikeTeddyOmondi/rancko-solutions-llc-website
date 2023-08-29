@@ -164,21 +164,22 @@ section.home {
 .home-content {
 	position: relative;
 	z-index: 10;
-	max-width: 600px;
+	max-width: 720px;
+	height: auto;
 }
 
-.home-img {
+/* .home-img {
 	position: absolute;
 	bottom: 0;
 	right: 0;
 	height: 110%;
-}
+} */
 
-.lottie-player {
-	position: absolute;
+.lottie-player-container {
+	position: inherit;
 	bottom: 0;
 	right: 0;
-	height: 110%;
+	height: 100%;
 }
 
 /* SERVICES PAGE */
@@ -391,11 +392,38 @@ section.home {
 }
 
 @media (max-width: 768px) {
+	.lottie-player-container {
+		display: none;
+	}
+
 	.services {
 		grid-template-columns: 1fr;
 	}
 	.services .service {
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+	}
+}
+
+@media (max-width: 480px) {
+	.lottie-player-container {
+		display: none;
+	}
+}
+
+@media (max-width: 280px) {
+	section.home {
+		margin-top: 8rem;
+	}
+
+	.home-content {
+		position: relative;
+		z-index: 10;
+		max-width: 720px;
+		height: auto;
+	}
+
+	.lottie-player-container {
+		display: none;
 	}
 }
 
