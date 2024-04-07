@@ -80,67 +80,67 @@ toggle.addEventListener("click", () => {
 // 	}
 // });
 
-const contactform = document.getElementById("contactForm");
-//const subscribeform = document.getElementById("subscribeForm");
+// const contactform = document.getElementById("contactForm");
+// //const subscribeform = document.getElementById("subscribeForm");
 
-const API_URL =
-  window.location.hostname === "127.0.0.1" ||
-  window.location.hostname === "localhost"
-    ? "http://localhost:5000"
-    : "https://api.ranckosolutions.com";
+// const API_URL =
+//   window.location.hostname === "127.0.0.1" ||
+//   window.location.hostname === "localhost"
+//     ? "http://localhost:5000"
+//     : "https://api.ranckosolutions.com";
 
-if (contactform) {
-  contactform.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const formData = new FormData(contactform);
-    const firstname = formData.get("fname");
-    const lastname = formData.get("lname");
-    const email = formData.get("email");
-    const subject = formData.get("subject");
-    const message = formData.get("message");
+// if (contactform) {
+//   contactform.addEventListener("submit", (event) => {
+//     event.preventDefault();
+//     const formData = new FormData(contactform);
+//     const firstname = formData.get("fname");
+//     const lastname = formData.get("lname");
+//     const email = formData.get("email");
+//     const subject = formData.get("subject");
+//     const message = formData.get("message");
 
-    if (!firstname || !lastname || !email || !subject || !message) {
-      alert("Please fill the entire form to send the message...");
-    } else {
-      const newContact = {
-        firstname,
-        lastname,
-        email,
-        subject,
-        message,
-      };
-      // console.log(newContact);
+//     if (!firstname || !lastname || !email || !subject || !message) {
+//       alert("Please fill the entire form to send the message...");
+//     } else {
+//       const newContact = {
+//         firstname,
+//         lastname,
+//         email,
+//         subject,
+//         message,
+//       };
+//       // console.log(newContact);
 
-      fetch(`${API_URL}/api/v1/contacts`, {
-        method: "POST",
-        body: JSON.stringify(newContact),
-        headers: {
-          "content-type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            const contentType = response.headers.get("content-type");
-            if (contentType.includes("json")) {
-              return response
-                .json()
-                .then((error) => Promise.reject(error.message));
-            } else {
-              return response.text().then((message) => Promise.reject(message));
-            }
-          }
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
+//       fetch(`${API_URL}/api/v1/contacts`, {
+//         method: "POST",
+//         body: JSON.stringify(newContact),
+//         headers: {
+//           "content-type": "application/json",
+//         },
+//       })
+//         .then((response) => {
+//           if (!response.ok) {
+//             const contentType = response.headers.get("content-type");
+//             if (contentType.includes("json")) {
+//               return response
+//                 .json()
+//                 .then((error) => Promise.reject(error.message));
+//             } else {
+//               return response.text().then((message) => Promise.reject(message));
+//             }
+//           }
+//         })
+//         .catch((error) => {
+//           console.log(error.message);
+//         });
 
-      contactform.reset();
-      alert(
-        `Thanks for your message. You'll be contacted through your email!...`
-      );
-    }
-  });
-}
+//       contactform.reset();
+//       alert(
+//         `Thanks for your message. You'll be contacted through your email!...`
+//       );
+//     }
+//   });
+// }
 
 // if (subscribeform) {
 // 	subscribeform.addEventListener("submit", (event) => {
