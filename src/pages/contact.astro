@@ -1,0 +1,51 @@
+---
+import ContactForm from "../components/ContactForm";
+import Base from "../layouts/Base.astro";
+---
+
+<Base>
+  <section>
+    <div class='title'>
+      <h1>Contact us</h1>
+      <p>
+        Feel free to fill the form when you need to book a consultation with us
+        or contact us for any of your inquiries.
+      </p>
+    </div>
+    <div class='contact'>
+      <div class='contact-form'>
+        <ContactForm client:load />
+      </div>
+
+      <div class='contact-info'>
+        <div class='info-box'>
+          <img src='images/address.png' class='contact-icon' alt='' />
+          <div class='details'>
+            <h4>Address</h4>
+            <p>215 North Wing, Utalii House. Nairobi, Kenya.</p>
+          </div>
+        </div>
+        <div class='info-box'>
+          <img src='images/email.png' class='contact-icon' alt='' />
+          <div class='details'>
+            <h4>Email</h4>
+            <a href='mailto:info@ranckosolutions.com'
+              >info@ranckosolutions.com</a
+            >
+            |
+            <a href='mailto:ranckosolutionsinc@gmail.com'
+              >ranckosolutionsinc@gmail.com</a
+            >
+          </div>
+        </div>
+        <div class='info-box'>
+          <img src='images/call.png' class='contact-icon' alt='' />
+          <div class='details'>
+            <h4>Call</h4>
+            <a href='tel:+254717135176'>+254 717 135176</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

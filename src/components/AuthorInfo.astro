@@ -1,0 +1,23 @@
+---
+const { data } = Astro.props;
+---
+
+<div class='blog-author d-flex align-items-center'>
+  <img
+    src='/images/blog/image-placeholder.png'
+    class='rounded-circle flex-shrink-0'
+    alt=''
+  />
+  <div>
+    <h4>{data.author}</h4>
+    <div class='social-links'>
+      <a href='https://twitter.com/MikeTeddyOmondi' target='_blank'
+        ><i class='bi bi-twitter'></i></a
+      >
+      <a href='https://instagram.com/miketeddyomondi' target='_blank'
+        ><i class='biu bi-instagram'></i></a
+      >
+    </div>
+    <p>{data.authorDesignation}</p>
+  </div>
+</div>

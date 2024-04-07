@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Base>
+  <!-- Blog Section - Blog Page -->
+  <section id='blog' class='blog'>
+    <div class='title'>
+      <h1>Blog</h1>
+      <p>
+        Find content on software development, business and technology in
+        general.
+      </p>
+    </div>
+    <div class='container'>
+      <div class='row gy-4 posts-list'>
+        {
+          posts.map((post) => (
+            <div class='col-xl-4 col-lg-6 m-2'>
+              <article>
+                <div class='post-img'>
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    class='img-fluid'
+                  />
+                </div>
+
+                <p class='post-category'>{post.data.category}</p>
+
+                <h2 class='title'>
+                  <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                </h2>
+
+                <div class='d-flex align-items-center'>
+                  <div class='post-meta'>
+                    <p class='post-date'>
+                      <FormattedDate date={post.data.pubDate} />
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          ))
+        }
+      </div>
+      <!-- End blog posts list -->
+
+      <!-- <div class='pagination d-flex justify-content-center'>
+        <ul>
+          <li><a href='#'>1</a></li>
+          <li class='active'><a href='#'>2</a></li>
+          <li><a href='#'>3</a></li>
+        </ul>
+      </div> -->
+      <!-- End pagination -->
+    </div>
+  </section><!-- End Blog Section -->
+
+  <div class='loading'>
+    <div class='ball'></div>
+    <div class='ball'></div>
+    <div class='ball'></div>
+  </div>
+</Base>

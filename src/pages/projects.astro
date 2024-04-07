@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base>
+  <section>
+    <div class='title'>
+      <h1>Our work and their source code</h1>
+      <p>
+        You can check out some of the repositories we commit to to deliver
+        designs and software applications.
+      </p>
+    </div>
+    <div
+      class='github-widget portfolio'
+      data-user='MikeTeddyOmondi'
+      data-options='{"sortBy":"startgazers_count", "limit":10}'
+    >
+    </div>
+  </section>
+</Base>
+
+<script src='/js/github-widget.min.js' is:inline></script>
+
