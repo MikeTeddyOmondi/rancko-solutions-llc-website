@@ -1,5 +1,5 @@
-const staticCacheStorage = "rancko-solutions-static-v3";
-const dynamicCacheStorage = "rancko-solutions-dynamic-v3";
+const staticCacheStorage = "rancko-solutions-static-v4";
+const dynamicCacheStorage = "rancko-solutions-dynamic-v4";
 
 const staticAssets = [
 	"/",
