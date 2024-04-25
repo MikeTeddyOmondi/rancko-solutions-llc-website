@@ -1,5 +1,5 @@
 "use strict";
-console.log("JavaScript running!...");
+// console.log("JavaScript running!...");
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () =>
@@ -10,13 +10,13 @@ if ("serviceWorker" in navigator) {
   );
 }
 
-const toggle = document.querySelector(".toggle");
-const navigation = document.querySelector(".navigation");
+// const toggle = document.querySelector(".toggle");
+// const navigation = document.querySelector(".navigation");
 
-toggle.addEventListener("click", () => {
-  toggle.classList.toggle("active");
-  navigation.classList.toggle("active");
-});
+// toggle.addEventListener("click", () => {
+//   toggle.classList.toggle("active");
+//   navigation.classList.toggle("active");
+// });
 
 // document.addEventListener("DOMContentLoaded", () => {
 // 	//window.location = "blogs.html";
