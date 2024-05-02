@@ -6,7 +6,7 @@ updatedDate: "May 01, 2024"
 heroImage: "/images/blog/what-does-it-take-to-become-a-software-engineer.jpg"
 author: "Mike Teddy Omondi"
 authorDesignation: "Founder - Rancko Solutions."
-category: "Software Engineering"
+category: "Software"
 tags: ["featured"]
 ---
 
