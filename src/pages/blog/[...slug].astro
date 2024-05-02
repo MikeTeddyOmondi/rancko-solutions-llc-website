@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, getEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import BlogSideBar from "../../components/BlogSideBar.astro";
 import CommentSection from "../../components/CommentSection.astro";
@@ -7,47 +7,58 @@ import FormattedDate from "../../components/FormattedDate.astro";
 import AuthorInfo from "../../components/AuthorInfo.astro";
 // import BlogPost from "../../layouts/BlogPost.astro";
 
-export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
-  }));
-}
+// export async function getStaticPaths() {
+//   const posts = await getCollection("blog");
+//   return posts.map((post) => ({
+//     params: { slug: post.slug },
+//     props: post,
+//   }));
+// }
 type Props = CollectionEntry<"blog">;
 
-const post = Astro.props;
-const { Content } = await post.render();
+const { slug } = Astro.params;
+
+if (slug === undefined) {
+  throw new Error("Slug is required");
+}
+
+const post = await getEntry("blog", slug);
+
+const { Content } = await post!.render();
+
+//const post = Astro.props;
+// const { Content } = await post.render();
 ---
 
 <Base>
   <section id='blog-details' class='blog-details'>
     <div class='container' data-aos='fade-up' data-aos-delay='100'>
+      <a href='/blog' class='btn'>↶ Back</a>
       <div class='row g-5'>
         <div class='col-lg-8'>
           <article class='article'>
             <div class='post-img'>
               <img
-                src={post.data.heroImage}
-                alt={post.data.title}
+                src={post?.data.heroImage}
+                alt={post?.data.title}
                 class='img-fluid'
               />
             </div>
 
             <h2 class='title'>
-              {post.data.title}
+              {post?.data.title}
             </h2>
 
             <div class='meta-top'>
               <ul>
                 <li class='d-flex align-items-center'>
                   <i class='bi bi-person'></i>
-                  <a href='blog-details.html'>{post.data.author}</a>
+                  <a href='blog-details.html'>{post?.data.author}</a>
                 </li>
                 <li class='d-flex align-items-center'>
                   <i class='bi bi-clock'></i>
                   <a href='blog-details.html'>
-                    <FormattedDate date={post.data.pubDate} />
+                    <FormattedDate date={post!.data.pubDate} />
                   </a>
                 </li>
               </ul>
@@ -61,7 +72,7 @@ const { Content } = await post.render();
           </article>
           <!-- End post article -->
 
-          <AuthorInfo data={post.data} />
+          <AuthorInfo data={post?.data} />
 
           <!-- <CommentSection /> -->
         </div>

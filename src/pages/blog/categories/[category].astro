@@ -1,0 +1,151 @@
+---
+import { type CollectionEntry, getCollection, getEntries } from "astro:content";
+import Base from "../../../layouts/Base.astro";
+import BlogSideBar from "../../../components/BlogSideBar.astro";
+import CommentSection from "../../../components/CommentSection.astro";
+import FormattedDate from "../../../components/FormattedDate.astro";
+import AuthorInfo from "../../../components/AuthorInfo.astro";
+// import BlogPost from "../../layouts/BlogPost.astro";
+
+import {
+  capitalizeFirstLetter,
+  generateCategoryData,
+} from "../../../utils/helpers.js";
+
+// export async function getStaticPaths() {
+//   const posts = await getCollection("blog");
+//   console.log({ posts });
+//   return [
+//     { params: { category: "general" }, props: { posts: posts } },
+//     { params: { category: "business" }, props: { posts: posts } },
+//     { params: { category: "software-developement" }, props: { posts: posts } },
+//     { params: { category: "technology" }, props: { posts: posts } },
+//   ];
+// }
+
+const category = Astro.params.category as string;
+
+if (category === undefined) {
+  throw new Error("Category is required");
+}
+
+const allPosts: CollectionEntry<"blog">[] = (await getCollection("blog")).sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// console.log({ category });
+
+const postsByCategory = allPosts.filter((post) =>
+  post.data.category.toLowerCase().includes(category)
+);
+
+// console.log({ postsByCategory });
+
+// export async function getStaticPaths() {
+//   const allPosts = Astro.fetchContent("../*.md");
+//   const sortedPosts = allPosts.sort(
+//     (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
+//   );
+//   const allCategoriesUnique = new Set();
+//   sortedPosts.forEach((post) => {
+//     post.categories &&
+//       post.categories.map((category) => {
+//         allCategoriesUnique.add(category);
+//       });
+//   });
+//   const allCategoriesData = generateCategoryData(allCategoriesUnique);
+//   // map through the categories array
+//   return allCategoriesData.map((category) => {
+//     // filter the posts that match the given category
+//     const posts = sortedPosts.filter((post) =>
+//       post.categories.includes(category.name)
+//     );
+//     return {
+//       params: { slug: category.slug },
+//       props: {
+//         category: category.name,
+//         posts: posts,
+//       },
+//     };
+//   });
+// }
+
+// const { category, posts } = Astro.props;
+// const title = `Blog Posts Tagged with ${category}`;
+
+// type Props = CollectionEntry<"blog">;
+
+// const { category } = Astro.params;
+// // const { posts } = await getEntries(blogPost.data.relatedPosts); //Astro.props;
+// const categorisedPosts = await getCollection("blog", ({ data }) => {
+//   return data.category === category;
+// });
+
+// const allCategoryPosts: Props[] = posts.filter((post) => {
+//   return String(post.data.category).toLowerCase() === category;
+// });
+---
+
+<Base>
+  <!-- Blog Section - Blog Page -->
+  <section id='blog' class='blog'>
+    <div class='title'>
+      <h1>Blog Category: {capitalizeFirstLetter(category)}</h1>
+      <p>
+        Found {postsByCategory.length === 0 ? "no" : postsByCategory.length} blog
+        on {category} category.
+      </p>
+    </div>
+
+    <div class='container' data-aos='fade-up' data-aos-delay='100'>
+      <div class='row gy-4 posts-list'>
+        {
+          postsByCategory.map((post) => (
+            <div class='col-xl-4 col-lg-6 m-2'>
+              <article>
+                <div class='post-img'>
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    class='img-fluid'
+                  />
+                </div>
+
+                <p class='post-category'>{post.data.category}</p>
+
+                <h2 class='title'>
+                  <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                </h2>
+
+                <div class='d-flex align-items-center'>
+                  <div class='post-meta'>
+                    <p class='post-date'>
+                      <FormattedDate date={post.data.pubDate} />
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          ))
+        }
+      </div>
+      <!-- End blog posts list -->
+
+      <!-- <div class='pagination d-flex justify-content-center'>
+        <ul>
+          <li><a href='#'>1</a></li>
+          <li class='active'><a href='#'>2</a></li>
+          <li><a href='#'>3</a></li>
+        </ul>
+      </div> -->
+      <!-- End pagination -->
+    </div>
+  </section><!-- End Blog Section -->
+
+  <div class='loading'>
+    <div class='ball'></div>
+    <div class='ball'></div>
+    <div class='ball'></div>
+  </div>
+</Base>

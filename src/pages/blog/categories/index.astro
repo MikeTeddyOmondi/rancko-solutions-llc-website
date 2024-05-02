@@ -1,0 +1,49 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Base from "../../../layouts/Base.astro";
+import { generateCategoryData } from "../../../utils/helpers.js";
+
+// const allPosts = await getCollection("blog");
+const allCategoriesUnique = new Set<string>();
+
+const allPosts: CollectionEntry<"blog">[] = (await getCollection("blog")).sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+allPosts.forEach((post) => {
+  post.data.category && allCategoriesUnique.add(post.data.category);
+});
+
+console.log({ allCategoriesUnique });
+
+const allCategoriesData = generateCategoryData(allCategoriesUnique);
+console.log({ allCategoriesData });
+
+const title = "Blog Categories";
+---
+
+<Base title={title}>
+  <section>
+    <div class='title'>
+      <h1>{title}</h1>
+      <p>All the blog categories ou can find here...</p>
+    </div>
+    <div class='services'>
+      {
+        allCategoriesData.map((category) => (
+          <>
+            <div class='service'>
+              <div class='icon'>
+                <img src='/images/001.png' alt='' />
+              </div>
+              <h2>Design</h2>
+              <a href={`/blog/categories/${category.slug}`}>{category.name}</a>
+            </div>
+            <li />
+          </>
+        ))
+      }
+    </div>
+  </section>
+</Base>

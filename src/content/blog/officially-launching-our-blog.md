@@ -5,7 +5,7 @@ pubDate: "April 08, 2024"
 updatedDate: "April 08, 2024"
 heroImage: "/images/blog/officially-launching-our-blog.png"
 author: "Mike Teddy Omondi"
-authorDesignation: "CEO - Rancko Solutions."
+authorDesignation: "Founder - Rancko Solutions."
 category: "General"
 tags: ["featured"]
 ---
